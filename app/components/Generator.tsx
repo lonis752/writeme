@@ -11,11 +11,12 @@ const Generator = () => {
   console.log(link);
   console.log(content);
   const URL =
-    process.env.NEXT_PUBLIC_MODE_ENV === 'development'
+    process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/api/gpt'
       : '/api/gpt';
 
-  const getContent = async () => {
+  const getContent = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
     console.log('Sending request to:', URL);
 
@@ -24,7 +25,7 @@ const Generator = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          text: 'can i get a hug',
+          text: link,
         }),
       });
 
@@ -39,7 +40,7 @@ const Generator = () => {
 
       // ✅ Extract content correctly
       const messageContent =
-        data?.choices?.[0]?.message?.content || 'No content received';
+        data?.message || 'No content received';
       console.log('Extracted content:', messageContent);
 
       setContent(messageContent);
@@ -96,9 +97,9 @@ const Generator = () => {
         </div>
       </div>
       <div className={isLoading ? 'hidden' : ''}>
-        <form>
+        <form onSubmit={getContent}>
           <Input onChange={(e) => setLink(e.target.value)} />
-          <Button onClick={getContent}>Generate</Button>
+          <Button type='submit'>Generate</Button>
         </form>
         <p>{content}</p>
       </div>
