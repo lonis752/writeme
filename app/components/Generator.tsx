@@ -2,15 +2,45 @@
 
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
 import Image from 'next/image';
 
 const Generator = () => {
+  const textRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
   const [link, setLink] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [limitReached, setLimitReached] = useState<boolean>(false);
+  const [remainingUses, setRemainingUses] = useState<number | null>(null);
+
+  const copyText = () => {
+    if (textRef.current) {
+      const text = textRef.current.innerText; // Get only the text content
+      navigator.clipboard.writeText(text); // Copy to clipboard
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const checkUsageLimit = async () => {
+    try {
+      const response = await fetch('/api/usage');
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.error);
+
+      setRemainingUses(data.remaining);
+      return data.remaining > 0;
+    } catch (error) {
+      console.error('Usage check failed:', error);
+      setLimitReached(true);
+      alert('Daily limit reached');
+      return false;
+    }
+  };
 
   const URL =
     process.env.NODE_ENV === 'development'
@@ -20,23 +50,18 @@ const Generator = () => {
   const getContent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await fetch('/api/generate', { method: 'POST' });
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert(data.error);
-      return;
-    }
-
-    if (!link.trim()) {
-      alert('Please enter a valid GitHub repository URL.');
+    const canGenerate = await checkUsageLimit();
+    if (!canGenerate) {
+      setLimitReached(true);
       return;
     }
 
     setIsLoading(true);
-    console.log('Sending request to:', URL);
 
     try {
+      // Call the POST API to update last usage time
+      await fetch('/api/usage', { method: 'POST' });
+
       const response = await fetch(URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -45,20 +70,16 @@ const Generator = () => {
         }),
       });
 
-      console.log('Response status:', response.status);
-
       if (!response.ok) {
         throw new Error(`API error: ${response.status} ${response.statusText}`);
       }
 
       const data = await response.json();
-      console.log('Response JSON:', data);
 
       const messageContent = data?.message || 'No content received';
-      console.log('Extracted content:', messageContent);
 
       const validContent = messageContent.split('```markdown');
-      setContent(validContent);
+      setContent(validContent.join(''));
     } catch (error) {
       console.error('Error fetching content:', error);
       setContent('Failed to load content.');
@@ -70,7 +91,7 @@ const Generator = () => {
 
   const HTMLView: React.FC = () => {
     return (
-      <div
+      <div ref={textRef}
         className={
           content ? 'bg-gray-300 p-5 rounded-2xl w-full overflow-auto' : ''
         }
@@ -177,29 +198,43 @@ const Generator = () => {
               transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
             >
               <Input
-                className='w-90'
+                className=''
                 onChange={(e) => setLink(e.target.value)}
                 value={link}
                 required
               />
               <Button
-                className='hover:bg-yellow-400 hover:text-black px-6 py-3 font-semibold rounded-lg shadow-lg 
-                hover:shadow-xl active:shadow-md active:translate-y-1 transition'
+                disabled={!link.trim()}
+                className={`px-6 py-3 font-semibold rounded-lg shadow-lg transition ${
+                  !link.trim() || remainingUses === 0
+                    ? 'hover:bg-gray-400 text-yellow-400 cursor-not-allowed'
+                    : 'hover:bg-yellow-400 hover:text-black hover:shadow-xl active:shadow-md active:translate-y-1'
+                }`}
                 type='submit'
               >
                 ↻ Generate
               </Button>
             </motion.form>
 
-            <motion.h2
+            <motion.div
               className='max-w-5/6 text-center font-semibold'
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, ease: 'easeOut', delay: 0.8 }}
             >
-              Enter your GitHub repo to generate a polished README
-              template—ready to copy, paste, and customize.
-            </motion.h2>
+              <h2>
+                Repo to a polished README Markdown template—ready to copy,
+                paste, and customize.
+              </h2>
+              <p>
+                You can generate markdown <strong>once per day!</strong> Make
+                sure to double check your URL.
+              </p>
+              <p>
+                Tip 💡: Add to your current readme file for us to get a better
+                grasp of your project.
+              </p>
+            </motion.div>
           </div>
         </div>
 
@@ -213,6 +248,12 @@ const Generator = () => {
               alt='arrow png by Muhazdinata'
               className='w-7 h-7 mt-1'
             />
+            <button
+              onClick={copyText}
+              className='bg-gray-200 px-2 py-1 rounded-md text-sm hover:bg-gray-300'
+            >
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
           </div>
 
           <HTMLView />
