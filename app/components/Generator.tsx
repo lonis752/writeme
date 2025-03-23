@@ -25,7 +25,7 @@ const Generator = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          text: link,
+          text: `Using this GitHub repo link (${link}) and write a full README.md file with a thorough deep dive of their project in markdown language with a title, replaceable area for preview image, detailed description of what the project does, list of the core features, list of tech stack, installation/repo cloning steps, future improvements, and a friendly message inviting contributions to the repo all in markdown so that the recipient of your answer will be able to copy and paste exactly what you reply with into their README.md file.`,
         }),
       });
 
