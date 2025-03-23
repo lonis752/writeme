@@ -3,11 +3,13 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import React, { useState } from 'react';
+import { marked } from 'marked';
 
 const Generator = () => {
   const [link, setLink] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   console.log(link);
   console.log(content);
   const URL =
@@ -39,8 +41,7 @@ const Generator = () => {
       console.log('Response JSON:', data);
 
       // ✅ Extract content correctly
-      const messageContent =
-        data?.message || 'No content received';
+      const messageContent = data?.message || 'No content received';
       console.log('Extracted content:', messageContent);
 
       setContent(messageContent);
@@ -102,6 +103,141 @@ const Generator = () => {
           <Button type='submit'>Generate</Button>
         </form>
         <p>{content}</p>
+        <div>
+          <p># Members-Only Club 🔒</p>
+
+          <p>![Project Preview](replace-with-image-url)</p>
+
+          <p>
+            A full-stack **exclusive message board** where only registered
+            members can view message authors. Built using **Node.js, Express,
+            MongoDB, and Handlebars**, this project implements authentication
+            and authorization to differentiate between regular users and
+            privileged members.
+          </p>
+
+          <p>
+            ## 📖 About the Project
+            <br />
+            - Anyone can **view** public messages.
+            <br />
+            - Only logged-in users can **post messages**.
+            <br />- Members with elevated privileges can **see message
+            authors**.
+          </p>
+
+          <p>
+            It serves as a practical example of implementing **user
+            authentication, role-based access control (RBAC), and database
+            persistence** in a full-stack web application.
+          </p>
+
+          <p>
+            ## 🚀 Features
+            <br />
+            - 👤 **User Authentication** – Signup, login, and logout with secure
+            password hashing.
+            <br />
+            - 📝 **Post Messages** – Users can add new messages to the board.
+            <br />
+            - 🔒 **Role-Based Access** – Only "members" can see message authors.
+            <br />
+            - 🗑 **Delete Messages** – Admin users can delete inappropriate
+            messages.
+            <br />
+            - 🎨 **Minimalist UI** – Clean and simple layout using Handlebars.
+            <br />- 📦 **Persistent Storage** – Messages and user accounts are
+            stored in MongoDB.
+          </p>
+
+          <p>
+            ## 🛠️ Tech Stack
+            <br />
+            - **Backend:** Node.js, Express.js
+            <br />
+            - **Frontend:** Handlebars (templating engine)
+            <br />
+            - **Database:** MongoDB with Mongoose ORM
+            <br />
+            - **Authentication:** Passport.js (Local Strategy)
+            <br />- **Styling:** CSS
+          </p>
+
+          <p>## 📥 Installation & Setup</p>
+
+          <p>### 1️⃣ Clone the Repository</p>
+          <p>
+            <code>
+              git clone https://github.com/lonis752/members-only.git
+              <br />
+              cd members-only
+            </code>
+          </p>
+
+          <p>### 2️⃣ Install Dependencies</p>
+          <p>
+            <code>npm install</code>
+          </p>
+
+          <p>### 3️⃣ Configure Environment Variables</p>
+          <p>
+            Create a **.env** file in the root directory and add the following:
+          </p>
+          <p>
+            <code>
+              MONGO_URI=your-mongodb-connection-string
+              <br />
+              SESSION_SECRET=your-secret-key
+            </code>
+          </p>
+
+          <p>### 4️⃣ Run the Application</p>
+          <p>
+            <code>npm start</code>
+          </p>
+
+          <p>
+            This will start the server on <code>http://localhost:3000/</code>.
+          </p>
+
+          <p>
+            ## 🔮 Future Improvements
+            <br />
+            - ✅ Add a **"request membership"** feature for users.
+            <br />
+            - 🛑 Implement **moderation tools** for admins.
+            <br />
+            - 📧 Integrate **email verification** on signup.
+            <br />- 🎨 Improve UI/UX with better styling.
+          </p>
+
+          <p>
+            ## 🤝 Contributing
+            <br />
+            Contributions are welcome! If you'd like to enhance the project,
+            feel free to:
+          </p>
+
+          <p>
+            1. **Fork** the repository.
+            <br />
+            2. **Create a new branch** (
+            <code>git checkout -b feature-branch</code>).
+            <br />
+            3. **Commit your changes** (
+            <code>git commit -m "Added a cool feature"</code>).
+            <br />
+            4. **Push to GitHub** (<code>git push origin feature-branch</code>).
+            <br />
+            5. **Submit a pull request** 🚀
+          </p>
+
+          <p>For suggestions or issues, open a **GitHub Issue**.</p>
+
+          <p>---</p>
+
+          <p>🚀 **Happy Coding & Welcome to the Club!** 🎯</p>
+        </div>
       </div>
     </>
   );

@@ -1,2 +1,72 @@
-```markdown # TODO App (PERN Stack) ![Preview](insert-your-image-url-here) ## Description The **TODO App** is a simple yet powerful web application developed using the PERN stack (PostgreSQL, Express.js, React.js, and Node.js). This project allows users to create, read, update, and delete (CRUD) tasks in a user-friendly interface. It serves as an excellent demonstration of how the PERN stack can be leveraged to build a full-stack application, showcasing both front-end and back-end development practices. This application is designed to help users manage their daily tasks efficiently. Users can easily keep track of what they need to do, prioritize their tasks, and mark them as complete when finished. The modular structure of the codebase and the use of modern frameworks make it a great learning tool for developers who are looking to understand how to integrate various technologies in web development. ## Core Features - **User Authentication**: Secure login/logout functionality to protect user data. - **Task Management**: Create, read, update, and delete tasks. - **Responsive Design**: A user-friendly interface that works well on various devices. - **Data Persistence**: Uses PostgreSQL for storing tasks in a robust database. - **RESTful API**: Built with Express.js to handle requests and serve data to the client seamlessly. - **Real-Time Updates**: React.js allows for dynamic updates without the need for page reloads. ## Tech Stack - **Frontend**: - React.js - Axios (for API calls) - Bootstrap (for styling) - **Backend**: - Node.js - Express.js - PostgreSQL (for the database) - Sequelize (as ORM) - **Development Tools**: - Git - npm/yarn ## Installation To get started with the TODO app, follow these steps to clone the repository: 1. **Clone the repository**: ```bash git clone https://github.com/lonis752/todo-PERN.git cd todo-PERN ``` 2. **Navigate to the backend directory and install dependencies**: ```bash cd backend npm install ``` 3. **Setup your database**: - Make sure you have PostgreSQL installed. - Create your database. - Update your database configurations in the backend `.env` file. 4. **Run the server**: ```bash npm start ``` 5. **Navigate to the frontend directory and install dependencies**: ```bash cd ../frontend npm install ``` 6. **Run the React application**: ```bash npm start ``` Now you can access the TODO app on `http://localhost:3000`! ## Future Improvements While the TODO app provides a solid foundation for task management, there are many opportunities for enhancement: - **Implementing User Roles**: Enable different user roles (admin, user) to manage tasks differently. - **Task Due Dates**: Add an option for users to set due dates for tasks, along with reminders. - **Search and Filter**: Implement search and filter capabilities for easier task management. - **Progress Tracking**: Allow users to track the progress of each task visually. - **Unit and Integration Tests**: Build a robust test suite to ensure the reliability of the application. ## Contributing We welcome contributions from anyone interested in improving this project! If you're looking to contribute, please follow these steps: 1. Fork the repository. 2. Create a branch for your feature or bug fix. 3. Make your changes and commit them with clear messages. 4. Push your branch to your fork and submit a pull request. Let's collaborate to enhance this TODO app together! ``` This README is now ready to be used in the repository and will provide a comprehensive overview for developers and users alike. Just replace the placeholder for the preview image with the actual URL for an image that showcases the project.
+# Members-Only Club 🔒
 
+![Project Preview](replace-with-image-url)
+
+A full-stack **exclusive message board** where only registered members can view message authors. Built using **Node.js, Express, MongoDB, and Handlebars**, this project implements authentication and authorization to differentiate between regular users and privileged members.
+
+## 📖 About the Project
+- Anyone can **view** public messages.
+- Only logged-in users can **post messages**.
+- Members with elevated privileges can **see message authors**.
+
+It serves as a practical example of implementing **user authentication, role-based access control (RBAC), and database persistence** in a full-stack web application.
+
+## 🚀 Features
+- 👤 **User Authentication** – Signup, login, and logout with secure password hashing.
+- 📝 **Post Messages** – Users can add new messages to the board.
+- 🔒 **Role-Based Access** – Only "members" can see message authors.
+- 🗑 **Delete Messages** – Admin users can delete inappropriate messages.
+- 🎨 **Minimalist UI** – Clean and simple layout using Handlebars.
+- 📦 **Persistent Storage** – Messages and user accounts are stored in MongoDB.
+
+## 🛠️ Tech Stack
+- **Backend:** Node.js, Express.js
+- **Frontend:** Handlebars (templating engine)
+- **Database:** MongoDB with Mongoose ORM
+- **Authentication:** Passport.js (Local Strategy)
+- **Styling:** CSS
+
+## 📥 Installation & Setup
+
+### 1️⃣ Clone the Repository
+
+git clone https://github.com/lonis752/members-only.git
+cd members-only
+
+### 2️⃣ Install Dependencies
+
+npm install
+
+### 3️⃣ Configure Environment Variables
+
+Create a **.env** file in the root directory and add the following:
+
+MONGO_URI=your-mongodb-connection-string
+SESSION_SECRET=your-secret-key
+
+### 4️⃣ Run the Application
+
+npm start
+
+This will start the server on http://localhost:3000/.
+
+## 🔮 Future Improvements
+- ✅ Add a **"request membership"** feature for users.
+- 🛑 Implement **moderation tools** for admins.
+- 📧 Integrate **email verification** on signup.
+- 🎨 Improve UI/UX with better styling.
+
+## 🤝 Contributing
+Contributions are welcome! If you'd like to enhance the project, feel free to:
+
+1. **Fork** the repository.
+2. **Create a new branch** (git checkout -b feature-branch).
+3. **Commit your changes** (git commit -m "Added a cool feature").
+4. **Push to GitHub** (git push origin feature-branch).
+5. **Submit a pull request** 🚀
+
+For suggestions or issues, open a **GitHub Issue**.
+
+---
+
+🚀 **Happy Coding & Welcome to the Club!** 🎯
