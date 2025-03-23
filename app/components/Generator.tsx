@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import React, { useState } from 'react';
-import { marked } from 'marked';
 
 const Generator = () => {
   const [link, setLink] = useState<string>('');
@@ -27,7 +26,7 @@ const Generator = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          text: `Using this GitHub repo link (${link}) and write a full README.md file with a thorough deep dive of their project in markdown language with a title, replaceable area for preview image, detailed description of what the project does, list of the core features, list of tech stack, installation/repo cloning steps, future improvements, and a friendly message inviting contributions to the repo all in markdown so that the recipient of your answer will be able to copy and paste exactly what you reply with into their README.md file.`,
+          text: `Using this GitHub repo link (${link}) and write a full README.md file with a thorough deep dive of their project with a title, replaceable area for preview image, detailed description of what the project does, list of the core features, list of tech stack, installation/repo cloning steps, future improvements, and a friendly message inviting contributions to the repo and format it like this:<div><div># Members Only</div><br /><div>![Project Preview](./preview-image.png) &lt;!-- Replace with an actual image path or URL --&gt;</div><br /><div>## 📖 Project Overview</div><br /><div>**project title** project desc.</div><br /><div>## ✨ Features</div><br /><div>- Feature1</div><div>- Feature2</div><br /><div>## 🛠️ Tech Stack</div><br /><div>- **Frontend**: EJS </div><div>- **Backend**: Node.js, Express.js</div><div>- **Database**: MongoDB with Mongoose ODM</div><div>- **Authentication**: Passport.js, bcrypt</div><div>- **Styling**: Custom CSS with Bootstrap</div><div>- **Middleware**: Express-session for session management</div><br /><div>## 🚀 Getting Started</div><br /><div>### 1️⃣ Clone the Repository</div><br /><div>\`\`\`sh</div><div>git clone https://github.com/lonis752/members-only.git</div><div>cd members-only</div><div>\`\`\`</div><br /><div>### 2️⃣ Install Dependencies</div><br /><div>\`\`\`sh</div><div>npm install</div><div>\`\`\`</div><br /><div>### 3️⃣ Set Up Environment Variables</div><br /><div>Create a \`.env\` file in the project root and add:</div><br /><div>\`\`\`ini</div><div>MONGO_URI=your_mongodb_connection_string</div><div>SESSION_SECRET=your_secret_key</div><div>\`\`\`</div><br /><div>### 4️⃣ Start the Development Server</div><br /><div>\`\`\`sh</div><div>npm start</div><div>\`\`\`</div><br /><div>The app will be running on \`http://localhost:3000\`.</div><br /><div>## 🔮 Future Improvements</div><br /><div>- Implementing user roles (e.g., admin, moderator)</div><div>- Adding user avatars for a more personalized experience</div><div>- Enhancing the UI with a modern design</div><div>- Implementing real-time messaging with WebSockets</div><br /><div>## 🤝 Contributing</div><br /><div>Contributions are welcome! If you have ideas for improvements, feel free to fork the repo, make changes, and submit a pull request. Let's build something awesome together! 🚀</div><br /><div>---</div><br /><div>Made with ❤️ by [name](GitHub link)</div><br /><br /></div>`,
         }),
       });
 
@@ -44,13 +43,18 @@ const Generator = () => {
       const messageContent = data?.message || 'No content received';
       console.log('Extracted content:', messageContent);
 
-      setContent(messageContent);
+      const validContent = messageContent.split("```markdown");
+      setContent(validContent);
     } catch (error) {
       console.error('Error fetching content:', error);
       setContent('Failed to load content.');
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const HTMLView: React.FC = () => {
+    return <div dangerouslySetInnerHTML={{ __html: content }} />;
   };
 
   return (
@@ -102,142 +106,7 @@ const Generator = () => {
           <Input onChange={(e) => setLink(e.target.value)} />
           <Button type='submit'>Generate</Button>
         </form>
-        <p>{content}</p>
-        <div>
-          <p># Members-Only Club 🔒</p>
-
-          <p>![Project Preview](replace-with-image-url)</p>
-
-          <p>
-            A full-stack **exclusive message board** where only registered
-            members can view message authors. Built using **Node.js, Express,
-            MongoDB, and Handlebars**, this project implements authentication
-            and authorization to differentiate between regular users and
-            privileged members.
-          </p>
-
-          <p>
-            ## 📖 About the Project
-            <br />
-            - Anyone can **view** public messages.
-            <br />
-            - Only logged-in users can **post messages**.
-            <br />- Members with elevated privileges can **see message
-            authors**.
-          </p>
-
-          <p>
-            It serves as a practical example of implementing **user
-            authentication, role-based access control (RBAC), and database
-            persistence** in a full-stack web application.
-          </p>
-
-          <p>
-            ## 🚀 Features
-            <br />
-            - 👤 **User Authentication** – Signup, login, and logout with secure
-            password hashing.
-            <br />
-            - 📝 **Post Messages** – Users can add new messages to the board.
-            <br />
-            - 🔒 **Role-Based Access** – Only "members" can see message authors.
-            <br />
-            - 🗑 **Delete Messages** – Admin users can delete inappropriate
-            messages.
-            <br />
-            - 🎨 **Minimalist UI** – Clean and simple layout using Handlebars.
-            <br />- 📦 **Persistent Storage** – Messages and user accounts are
-            stored in MongoDB.
-          </p>
-
-          <p>
-            ## 🛠️ Tech Stack
-            <br />
-            - **Backend:** Node.js, Express.js
-            <br />
-            - **Frontend:** Handlebars (templating engine)
-            <br />
-            - **Database:** MongoDB with Mongoose ORM
-            <br />
-            - **Authentication:** Passport.js (Local Strategy)
-            <br />- **Styling:** CSS
-          </p>
-
-          <p>## 📥 Installation & Setup</p>
-
-          <p>### 1️⃣ Clone the Repository</p>
-          <p>
-            <code>
-              git clone https://github.com/lonis752/members-only.git
-              <br />
-              cd members-only
-            </code>
-          </p>
-
-          <p>### 2️⃣ Install Dependencies</p>
-          <p>
-            <code>npm install</code>
-          </p>
-
-          <p>### 3️⃣ Configure Environment Variables</p>
-          <p>
-            Create a **.env** file in the root directory and add the following:
-          </p>
-          <p>
-            <code>
-              MONGO_URI=your-mongodb-connection-string
-              <br />
-              SESSION_SECRET=your-secret-key
-            </code>
-          </p>
-
-          <p>### 4️⃣ Run the Application</p>
-          <p>
-            <code>npm start</code>
-          </p>
-
-          <p>
-            This will start the server on <code>http://localhost:3000/</code>.
-          </p>
-
-          <p>
-            ## 🔮 Future Improvements
-            <br />
-            - ✅ Add a **"request membership"** feature for users.
-            <br />
-            - 🛑 Implement **moderation tools** for admins.
-            <br />
-            - 📧 Integrate **email verification** on signup.
-            <br />- 🎨 Improve UI/UX with better styling.
-          </p>
-
-          <p>
-            ## 🤝 Contributing
-            <br />
-            Contributions are welcome! If you'd like to enhance the project,
-            feel free to:
-          </p>
-
-          <p>
-            1. **Fork** the repository.
-            <br />
-            2. **Create a new branch** (
-            <code>git checkout -b feature-branch</code>).
-            <br />
-            3. **Commit your changes** (
-            <code>git commit -m "Added a cool feature"</code>).
-            <br />
-            4. **Push to GitHub** (<code>git push origin feature-branch</code>).
-            <br />
-            5. **Submit a pull request** 🚀
-          </p>
-
-          <p>For suggestions or issues, open a **GitHub Issue**.</p>
-
-          <p>---</p>
-
-          <p>🚀 **Happy Coding & Welcome to the Club!** 🎯</p>
-        </div>
+        <HTMLView />
       </div>
     </>
   );

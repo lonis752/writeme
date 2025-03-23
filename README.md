@@ -1,72 +1,77 @@
-# Members-Only Club 🔒
+# Todo PERN Application
 
-![Project Preview](replace-with-image-url)
+![Project Preview](./preview-image.png)
 
-A full-stack **exclusive message board** where only registered members can view message authors. Built using **Node.js, Express, MongoDB, and Handlebars**, this project implements authentication and authorization to differentiate between regular users and privileged members.
+## 📖 Project Overview
 
-## 📖 About the Project
-- Anyone can **view** public messages.
-- Only logged-in users can **post messages**.
-- Members with elevated privileges can **see message authors**.
+The Todo PERN project is a full-stack application that allows users to create, read, update, and delete todo items. Built using the PERN stack (PostgreSQL, Express, React, and Node.js), this project serves as a practical demonstration of how to implement CRUD operations through a modern web application. Leveraging the power of RESTful APIs and a PostgreSQL database, the application provides a smooth user experience with a self-contained architecture.
 
-It serves as a practical example of implementing **user authentication, role-based access control (RBAC), and database persistence** in a full-stack web application.
+## ✨ Features
 
-## 🚀 Features
-- 👤 **User Authentication** – Signup, login, and logout with secure password hashing.
-- 📝 **Post Messages** – Users can add new messages to the board.
-- 🔒 **Role-Based Access** – Only "members" can see message authors.
-- 🗑 **Delete Messages** – Admin users can delete inappropriate messages.
-- 🎨 **Minimalist UI** – Clean and simple layout using Handlebars.
-- 📦 **Persistent Storage** – Messages and user accounts are stored in MongoDB.
+- User authentication and authorization for secure access.
+- CRUD functionality for todo items: Create, Read, Update, and Delete.
+- Responsive design for seamless use across devices.
+- Real-time updates using React's state management.
+- Comprehensive error handling and validation.
 
 ## 🛠️ Tech Stack
-- **Backend:** Node.js, Express.js
-- **Frontend:** Handlebars (templating engine)
-- **Database:** MongoDB with Mongoose ORM
-- **Authentication:** Passport.js (Local Strategy)
-- **Styling:** CSS
 
-## 📥 Installation & Setup
+- **Frontend**: React.js
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL with Sequelize ORM
+- **Authentication**: JSON Web Tokens (JWT)
+- **Styling**: Custom CSS and Bootstrap
+- **Middleware**: Custom middleware for error handling and validation
+
+## 🚀 Getting Started
 
 ### 1️⃣ Clone the Repository
 
-git clone https://github.com/lonis752/members-only.git
-cd members-only
+```sh
+git clone https://github.com/lonis752/todo-PERN.git
+cd todo-PERN
+```
 
 ### 2️⃣ Install Dependencies
 
-npm install
+Navigate to both the client and server directories and install the dependencies:
 
-### 3️⃣ Configure Environment Variables
+```sh
+cd client && npm install
+cd ../server && npm install
+```
 
-Create a **.env** file in the root directory and add the following:
+### 3️⃣ Set Up Environment Variables
 
-MONGO_URI=your-mongodb-connection-string
-SESSION_SECRET=your-secret-key
+Create a `.env` file in the server directory and add:
 
-### 4️⃣ Run the Application
+```ini
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
 
-npm start
+### 4️⃣ Start the Development Server
 
-This will start the server on http://localhost:3000/.
+In separate terminal windows, start both the client and server:
+
+```sh
+cd server && npm start
+cd client && npm start
+```
+
+The app will be running on `http://localhost:3000` for the client and `http://localhost:5000` for the server.
 
 ## 🔮 Future Improvements
-- ✅ Add a **"request membership"** feature for users.
-- 🛑 Implement **moderation tools** for admins.
-- 📧 Integrate **email verification** on signup.
-- 🎨 Improve UI/UX with better styling.
+
+- Implementing a more robust state management solution (e.g., Redux).
+- Adding unit and integration tests for better reliability.
+- Expanding the application to support collaborative todo lists.
+- Adding filtering and sorting functionalities for todo items.
 
 ## 🤝 Contributing
-Contributions are welcome! If you'd like to enhance the project, feel free to:
 
-1. **Fork** the repository.
-2. **Create a new branch** (git checkout -b feature-branch).
-3. **Commit your changes** (git commit -m "Added a cool feature").
-4. **Push to GitHub** (git push origin feature-branch).
-5. **Submit a pull request** 🚀
-
-For suggestions or issues, open a **GitHub Issue**.
+Contributions are welcome! If you have ideas for improvements, feel free to fork the repo, make changes, and submit a pull request. Let's build something awesome together! 🚀
 
 ---
 
-🚀 **Happy Coding & Welcome to the Club!** 🎯
+Made with ❤️ by [lonis752](https://github.com/lonis752)
