@@ -24,7 +24,7 @@ export async function GET() {
     const now = Date.now();
     const lastUsedTimestamp = parseInt(lastUsed, 10);
     const oneDay = 24 * 60 * 60 * 1000;
-    let canUse = now - lastUsedTimestamp >= oneDay;
+    const canUse = now - lastUsedTimestamp >= oneDay;
 
     if (role === 'admin') {
         return NextResponse.json({ remaining: 1 })

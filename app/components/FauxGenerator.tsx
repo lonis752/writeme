@@ -1,15 +1,16 @@
-'use client'; // Required for Clerk components in App Router
+'use client';
 
-import { SignInButton } from '@clerk/nextjs';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const FauxGenerator = () => {
   const [link, setLink] = useState<string>('');
+
   return (
     <>
       <div>
@@ -30,8 +31,10 @@ const FauxGenerator = () => {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
               >
-                <img
-                  className='w-20 h-20 mt-4'
+                <Image
+                  width={20}
+                  height={20}
+                  className='mt-4'
                   src='arrow.png'
                   alt='arrow image by Ayub Irawan'
                 />
@@ -65,6 +68,7 @@ const FauxGenerator = () => {
               <Input
                 className='w-90'
                 onChange={(e) => setLink(e.target.value)}
+                value={link}
               />
               <Link href={`/sign-in`}>
                 <Button

@@ -37,7 +37,7 @@ const Generator = () => {
     } catch (error) {
       console.error('Usage check failed:', error);
       setLimitReached(true);
-      alert('Daily limit reached');
+      console.log(limitReached);
       return false;
     }
   };
