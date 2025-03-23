@@ -1,23 +1,38 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/app/components/ui/button';
+import { Input } from '@/app/components/ui/input';
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Typewriter } from 'react-simple-typewriter';
+import Image from 'next/image';
 
 const Generator = () => {
   const [link, setLink] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  console.log(link);
-  console.log(content);
   const URL =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/api/gpt'
       : '/api/gpt';
 
-  const getContent = async (e) => {
+  const getContent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const res = await fetch('/api/generate', { method: 'POST' });
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.error);
+      return;
+    }
+
+    if (!link.trim()) {
+      alert('Please enter a valid GitHub repository URL.');
+      return;
+    }
+
     setIsLoading(true);
     console.log('Sending request to:', URL);
 
@@ -39,22 +54,29 @@ const Generator = () => {
       const data = await response.json();
       console.log('Response JSON:', data);
 
-      // ✅ Extract content correctly
       const messageContent = data?.message || 'No content received';
       console.log('Extracted content:', messageContent);
 
-      const validContent = messageContent.split("```markdown");
+      const validContent = messageContent.split('```markdown');
       setContent(validContent);
     } catch (error) {
       console.error('Error fetching content:', error);
       setContent('Failed to load content.');
     } finally {
       setIsLoading(false);
+      setLink('');
     }
   };
 
   const HTMLView: React.FC = () => {
-    return <div dangerouslySetInnerHTML={{ __html: content }} />;
+    return (
+      <div
+        className={
+          content ? 'bg-gray-300 p-5 rounded-2xl w-full overflow-auto' : ''
+        }
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    );
   };
 
   return (
@@ -102,11 +124,99 @@ const Generator = () => {
         </div>
       </div>
       <div className={isLoading ? 'hidden' : ''}>
-        <form onSubmit={getContent}>
-          <Input onChange={(e) => setLink(e.target.value)} />
-          <Button type='submit'>Generate</Button>
-        </form>
-        <HTMLView />
+        <div className='flex justify-center p-9 sm:pt-20'>
+          <div className='max-w-5/6 flex flex-col items-center gap-5'>
+            <div className='flex flex-col items-center gap-10'>
+              <motion.h1
+                className='font-bold text-xl sm:text-2xl md:text-5xl'
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              >
+                Enter your Github repository URL
+              </motion.h1>
+              <motion.div
+                className='flex items-center justify-center'
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+              >
+                <Image
+                  width={20}
+                  height={20}
+                  className='w-20 h-20 mt-4'
+                  src='/arrow.png'
+                  alt='arrow image by Ayub Irawan'
+                />
+                <h2 className='py-8 px-4 font-bold text-gray-800 rounded-2xl bg-yellow-400 drop-shadow-[4px_4px_0px_rgba(0,0,0,0.6)]'>
+                  <span className='inline-block min-h-[50px] sm:min-h-1 sm:min-w-[400px] text-center'>
+                    <Typewriter
+                      words={[
+                        'github.com/[username]/[repo-name]',
+                        'Ditch Markdown.',
+                        'Streamline Deployment.',
+                        'Try it for yourself.',
+                      ]}
+                      loop={2}
+                      cursor
+                      cursorStyle='_'
+                      typeSpeed={50}
+                      deleteSpeed={30}
+                      delaySpeed={2000}
+                    />
+                  </span>
+                </h2>
+              </motion.div>
+            </div>
+
+            <motion.form
+              className='flex flex-col sm:flex-row gap-2 items-center justify-center p-10 w-2/3'
+              onSubmit={getContent}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            >
+              <Input
+                className='w-90'
+                onChange={(e) => setLink(e.target.value)}
+                value={link}
+                required
+              />
+              <Button
+                className='hover:bg-yellow-400 hover:text-black px-6 py-3 font-semibold rounded-lg shadow-lg 
+                hover:shadow-xl active:shadow-md active:translate-y-1 transition'
+                type='submit'
+              >
+                ↻ Generate
+              </Button>
+            </motion.form>
+
+            <motion.h2
+              className='max-w-5/6 text-center font-semibold'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, ease: 'easeOut', delay: 0.8 }}
+            >
+              Enter your GitHub repo to generate a polished README
+              template—ready to copy, paste, and customize.
+            </motion.h2>
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-5 items-center justify-center p-10'>
+          <div className={content ? 'flex gap-2' : 'hidden'}>
+            <h2 className='font-semibold'>Here is your README template</h2>
+            <Image
+              height={7}
+              width={7}
+              src='/arrow-right.png'
+              alt='arrow png by Muhazdinata'
+              className='w-7 h-7 mt-1'
+            />
+          </div>
+
+          <HTMLView />
+        </div>
       </div>
     </>
   );
