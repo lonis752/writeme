@@ -111,7 +111,7 @@ const Generator = () => {
       >
         <div className='flex gap-2'>
           <h1 className='font-bold text-lg sm:text-2xl md:text-5xl'>
-            Your content is being generated
+            Your Markdown is being generated
           </h1>
           <div className='flex gap-1'>
             <h1 className='font-bold text-lg sm:text-2xl md:text-5xl animate-bounce'>
@@ -163,8 +163,8 @@ const Generator = () => {
                 transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
               >
                 <Image
-                  width={20}
-                  height={20}
+                  width={100}
+                  height={100}
                   className='w-20 h-20 mt-4'
                   src='/arrow.png'
                   alt='arrow image by Ayub Irawan'
@@ -242,11 +242,11 @@ const Generator = () => {
           <div className={content ? 'flex gap-2' : 'hidden'}>
             <h2 className='font-semibold'>Here is your README template</h2>
             <Image
-              height={7}
-              width={7}
+              height={20}
+              width={20}
               src='/arrow-right.png'
               alt='arrow png by Muhazdinata'
-              className='w-7 h-7 mt-1'
+              className='mt-1'
             />
             <button
               onClick={copyText}

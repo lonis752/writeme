@@ -35,7 +35,7 @@ const FauxGenerator = () => {
                   width={20}
                   height={20}
                   className='mt-4'
-                  src='arrow.png'
+                  src='/arrow.png'
                   alt='arrow image by Ayub Irawan'
                 />
                 <h2 className='py-8 px-4 font-bold text-gray-800 rounded-2xl bg-yellow-400 drop-shadow-[4px_4px_0px_rgba(0,0,0,0.6)]'>

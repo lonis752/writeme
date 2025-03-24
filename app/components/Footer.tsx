@@ -14,7 +14,7 @@ const Footer = () => {
     <>
       <section className="sm:px-10 px-5 pt-7 pb-3 border-t border-black-200 flex justify-center sm:justify-between items-center flex-wrap gap-5">
         <div className="text-white-200 flex gap-2 items-center">
-          <Image src="/favicon.ico" alt="my logo" className="hidden sm:block w-10 h-10" />
+          <Image width={100} height={100} src="/favicon.ico" alt="my logo" className="hidden sm:block" />
           <p>|</p>
           <p>Terms & <span className="text-purple">Conditions</span></p>
           <p>|</p>
@@ -23,17 +23,17 @@ const Footer = () => {
         <div className="flex gap-3">
           <div className="w-5 h-5 sm:w-10 sm:h-10 rounded-full flex justify-center items-center bg-black-300 border border-black-200">
             <a href="https://github.com/lonis752" target="_blank">
-              <Image src="/github-logo.png" alt="Github Logo from Freepik" className="" />
+              <Image width={100} height={100} src="/github-logo.png" alt="Github Logo from Freepik" className="" />
             </a>
           </div>
           <div className="w-5 h-5 sm:w-10 sm:h-10 rounded-full flex justify-center items-center bg-black-300 border border-black-200">
             <a href="https://x.com/lonis_k" target="_blank">
-              <Image src="/twitter.png" alt="X Logo from Freepik" className="" />
+              <Image width={100} height={100} src="/twitter.png" alt="X Logo from Freepik" className="" />
             </a>
           </div>
           <div className="w-5 h-5 sm:w-10 sm:h-10 rounded-full flex justify-center items-center bg-black-300 border border-black-200">
             <a href="https://www.linkedin.com/in/lonis-kwacke/" target="_blank">
-              <Image src="/linkedin.png" alt="LinkedIn Logo from Freepik" className="" />
+              <Image width={100} height={100} src="/linkedin.png" alt="LinkedIn Logo from Freepik" className="" />
             </a>
           </div>
         </div>

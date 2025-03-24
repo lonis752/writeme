@@ -1,35 +1,34 @@
-# Todo PERN
+# WriteMe
 
 
-![Project Preview](./preview-image.png)
+![Project Preview](./preview-image.png) <!-- Replace with an actual image path or URL -->
 
 
 ## 📖 Project Overview
 
 
-The Todo PERN project is a web application that allows users to manage their tasks effectively using the PERN stack which consists of PostgreSQL, Express.js, React, and Node.js. Users can create, read, update, and delete todo items, making it an efficient tool for personal or team-based task management.
+**WriteMe** is a web application that allows users to create, edit, and manage their written works, including essays, articles, and stories. The platform focuses on providing a user-friendly interface for writers to express their creativity and share their writing with others. Additionally, WriteMe includes features for collaboration and feedback, enabling writers to connect with fellow creators.
 
 
 ## ✨ Features
 
 
-- User authentication to secure access
-- CRUD functionalities for managing todo items
-- Responsive design for mobile and desktop views
-- Smooth user experience with React and dynamic rendering
-- Real-time updates with server-side communication
+- User registration and authentication
+- Create, edit, and delete various written entries
+- Collaboration features allowing users to invite others to work on documents
+- Commenting system for feedback on each piece of writing
+- Tagging and categorizing of writings for better organization
 
 
 ## 🛠️ Tech Stack
 
 
-- **Frontend**: React
+- **Frontend**: EJS
 - **Backend**: Node.js, Express.js
-- **Database**: PostgreSQL
-- **ORM**: Sequelize
-- **Authentication**: JSON Web Tokens (JWT), bcrypt for password hashing
-- **Styling**: Tailwind CSS for a modern UI
-- **Middleware**: Cors and Express-session for handling requests and session management
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: Passport.js, bcrypt
+- **Styling**: Custom CSS with Bootstrap
+- **Middleware**: Express-session for session management
 
 
 ## 🚀 Getting Started
@@ -39,8 +38,8 @@ The Todo PERN project is a web application that allows users to manage their tas
 
 
 ```sh
-git clone https://github.com/lonis752/todo-PERN.git
-cd todo-PERN
+git clone https://github.com/lonis752/writeme.git
+cd writeme
 ```
 
 
@@ -49,37 +48,25 @@ cd todo-PERN
 
 ```sh
 npm install
-cd client
-npm install
 ```
 
 
 ### 3️⃣ Set Up Environment Variables
 
 
-Create a `.env` file in the root of the project and add your database URL:
+Create a `.env` file in the project root and add:
 
 
 ```ini
-DATABASE_URL=your_postgresql_connection_string
-JWT_SECRET=your_jwt_secret_key
+MONGO_URI=your_mongodb_connection_string
+SESSION_SECRET=your_secret_key
 ```
 
 
 ### 4️⃣ Start the Development Server
 
 
-To start the backend server, run:
-
-
 ```sh
-npm start
-```
-Then, in a new terminal for the frontend:
-
-
-```sh
-cd client
 npm start
 ```
 
@@ -90,10 +77,10 @@ The app will be running on `http://localhost:3000`.
 ## 🔮 Future Improvements
 
 
-- Implementing task categories for better organization
-- Adding push notifications for task reminders
-- Enhancing UI/UX for a smoother interaction
-- Implementing a dark mode for better accessibility
+- Adding more collaborative tools, such as live editing
+- Implementing a user feedback and rating system for writings
+- Enhancing the UI/UX for a more immersive writing experience
+- Integrating third-party APIs for grammar and spell-checking
 
 
 ## 🤝 Contributing
@@ -105,8 +92,6 @@ Contributions are welcome! If you have ideas for improvements, feel free to fork
 ---
 
 
-Made with ❤️ by [your name](GitHub link)
+Made with ❤️ by [lonis752](https://github.com/lonis752)
 
 
-
-```
