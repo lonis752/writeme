@@ -32,8 +32,8 @@ const FauxGenerator = () => {
                 transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
               >
                 <Image
-                  width={20}
-                  height={20}
+                  width={100}
+                  height={100}
                   className='mt-4'
                   src='/arrow.png'
                   alt='arrow image by Ayub Irawan'

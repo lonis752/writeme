@@ -242,8 +242,8 @@ const Generator = () => {
           <div className={content ? 'flex gap-2' : 'hidden'}>
             <h2 className='font-semibold'>Here is your README template</h2>
             <Image
-              height={20}
-              width={20}
+              height={30}
+              width={30}
               src='/arrow-right.png'
               alt='arrow png by Muhazdinata'
               className='mt-1'
