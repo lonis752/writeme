@@ -91,7 +91,8 @@ const Generator = () => {
 
   const HTMLView: React.FC = () => {
     return (
-      <div ref={textRef}
+      <div
+        ref={textRef}
         className={
           content ? 'bg-gray-300 p-5 rounded-2xl w-full overflow-auto' : ''
         }
@@ -212,7 +213,7 @@ const Generator = () => {
                 }`}
                 type='submit'
               >
-                ↻ Generate
+                {remainingUses === 0 ? 'Out of uses' : "↻ Generate"}
               </Button>
             </motion.form>
 
