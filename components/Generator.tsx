@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@/app/components/ui/button';
-import { Input } from '@/app/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
@@ -213,7 +213,7 @@ const Generator = () => {
                 }`}
                 type='submit'
               >
-                {remainingUses === 0 ? 'Out of uses' : "↻ Generate"}
+                {remainingUses === 0 ? 'Out of uses' : '↻ Generate'}
               </Button>
             </motion.form>
 
